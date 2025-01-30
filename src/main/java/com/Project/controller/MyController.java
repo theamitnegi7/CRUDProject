@@ -77,4 +77,43 @@ public class MyController {
 		map.put("No Data in table", null);
 		return map;
 	}
+	
+	@PostMapping(value = "/updateStudent")
+	@CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST })
+	public HashMap<String,String> updateStudent(@RequestBody Student student)
+	{
+		HashMap<String,String> map=new HashMap<>();
+		if(student.getStudentId()==0)
+		{
+			map.put("Error", "Enter Student Id");
+			return map;
+		}
+		Student check=Srepo.findByStudentId(student.getStudentId());
+		
+		if(check!=null)
+		{
+			Srepo.save(student);
+			map.put("message","dataUpdated");
+			return map;
+		}
+		map.put("Error", "No record found");
+		return map;
+	}
+	
+	@PostMapping(value = "/deleteStudent")
+	@CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST })
+	public HashMap<String,String> deleteStudent(@RequestBody Student student)
+	{
+		HashMap<String,String> map=new HashMap<>();
+		Student check=Srepo.findByStudentId(student.getStudentId());
+		
+		if(check!=null)
+		{
+			Srepo.deleteById(student.getStudentId());
+			map.put("message","data deleted with studentId: "+student.getStudentId());
+			return map;
+		}
+		map.put("Error", "No record found");
+		return map;
+	}
 }
