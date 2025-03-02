@@ -16,16 +16,16 @@ A simple CRUD application built with Spring Boot. This project demonstrates basi
 2. Open Docker CLI and run the following command to pull the latest MySQL image:  
    `docker pull mysql:latest`
 3. Run the Docker container with this command:  
-   `docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=12345678 -d mysql:latest`
-4. To verify the container is running, use:  
+   `docker run -p 3306:3306 --name mysql-container -e MYSQL_ROOT_PASSWORD=12345678 -d mysql:latest`
+5. To verify the container is running, use:  
    `docker ps`  
    You should see your `mysql-container` in the list.  
-   **Note:** This will use port `3306`, the same as MySQL, so make sure to stop your local MySQL server first if it's running.
-5. Log in to the Docker MySQL container with:  
+   **Note:** This will use port `3306`, the same as MySQL, so stop your local MySQL server first if it's running.
+6. Log in to the Docker MySQL container with:  
    `docker exec -it mysql-container mysql -u root -p`
-6. Create a database named `Students` by running:  
+7. Create a database named `Students` by running:  
    `CREATE DATABASE Students;`
-7. Exit the MySQL container.
+8. Exit the MySQL container.
 
 ## Running the Project
 
